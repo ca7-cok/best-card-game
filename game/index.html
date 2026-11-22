@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AETHERFALL — Sigil Duel</title>
+<link rel="stylesheet" href="css/table.css">
+<link rel="stylesheet" href="css/cards.css">
+</head>
+<body>
+<div id="app">
+  <!-- The duel table -->
+  <main id="table" aria-label="AETHERFALL duel table">
+    <section id="enemy-area" class="side enemy-side">
+      <div class="fighter">
+        <div class="portrait enemy-portrait" aria-hidden="true">✦</div>
+        <div class="vitals">
+          <div class="fighter-name">VEX <span class="fighter-title">the Hollow Sigil</span></div>
+          <div class="hpbar" role="meter" aria-label="Vex life"><div id="enemy-hp-fill" class="hp-fill"></div><span id="enemy-hp-text" class="hp-text"></span></div>
+          <div class="shield-line">🛡 <span id="enemy-shield">0</span> shield &nbsp;·&nbsp; Score <span id="enemy-score">0</span></div>
+        </div>
+        <div id="enemy-intent" class="intent" aria-live="polite"></div>
+      </div>
+      <div id="enemy-hand" class="hand enemy-hand" aria-label="Vex's hand"></div>
+    </section>
+
+    <section id="centre" class="centre">
+      <div id="turn-banner" class="turn-banner">Your turn</div>
+      <div id="energy-row" class="energy-row" aria-label="Energy">
+        <span class="energy-label">ENERGY</span>
+        <span id="energy-pips" class="energy-pips"></span>
+      </div>
+      <div id="combo-row" class="combo-row">
+        <span id="resonance-note" class="combo-note"></span>
+        <span id="triad-note" class="combo-note"></span>
+      </div>
+      <div class="centre-actions">
+        <button id="end-turn" type="button">End turn ⏎</button>
+        <button id="mute-btn" type="button" aria-label="Toggle sound">🔊</button>
+        <button id="restart-btn" type="button" aria-label="Restart match">↻</button>
+      </div>
+      <ol id="log" class="log" aria-live="polite"></ol>
+    </section>
+
+    <section id="player-area" class="side player-side">
+      <div id="player-hand" class="hand player-hand" aria-label="Your hand"></div>
+      <div class="fighter">
+        <div class="portrait player-portrait" aria-hidden="true">▲</div>
+        <div class="vitals">
+          <div class="fighter-name">YOU <span class="fighter-title">Sigilkeeper</span></div>
+          <div class="hpbar" role="meter" aria-label="Your life"><div id="player-hp-fill" class="hp-fill"></div><span id="player-hp-text" class="hp-text"></span></div>
+          <div class="shield-line">🛡 <span id="player-shield">0</span> shield &nbsp;·&nbsp; Score <span id="player-score">0</span></div>
+        </div>
+        <div class="deck-count"><span id="player-deck">24</span> cards left<br><span id="player-discard">0</span> in discard</div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Title screen -->
+  <div id="title-screen" class="overlay title-overlay">
+    <div class="title-card">
+      <div class="title-sigils" aria-hidden="true"><span class="sg flame">▲</span><span class="sg tide">●</span><span class="sg gale">◆</span><span class="sg stone">■</span><span class="sg star">✦</span></div>
+      <h1>AETHERFALL</h1>
+      <p class="tagline">A duel of sigils. Outwit Vex, the Hollow Sigil.</p>
+      <div class="howto">
+        <p>⚡ Each turn you gain energy — spend it to play cards from your hand.</p>
+        <p>🔥 <b>Resonance:</b> the 2nd card of a suit in one turn gains a bonus.</p>
+        <p>✦ <b>Triad:</b> play three different suits in one turn to draw a card.</p>
+        <p>💀 Reduce Vex to 0 life to win. Suits are colour <i>and</i> shape, so every card reads at a glance.</p>
+        <p class="keys">Keys: <b>1–8</b> play a card · <b>Enter</b> end turn · <b>R</b> restart · <b>M</b> mute</p>
+      </div>
+      <button id="start-btn" type="button" class="big-btn">Begin the duel</button>
+      <p class="credit">An original game — no network, no account, just cards.</p>
+    </div>
+  </div>
+
+  <!-- Win screen -->
+  <div id="win-screen" class="overlay end-overlay" hidden>
+    <div class="end-card win-card">
+      <div class="end-burst" aria-hidden="true">✦ ✧ ✦</div>
+      <h2>VICTORY</h2>
+      <p class="end-line">Vex’s sigil shatters into light. The aether is yours.</p>
+      <p class="end-stats" id="win-stats"></p>
+      <button id="win-again-btn" type="button" class="big-btn">Duel again</button>
+    </div>
+  </div>
+
+  <!-- Loss screen -->
+  <div id="loss-screen" class="overlay end-overlay" hidden>
+    <div class="end-card loss-card">
+      <div class="end-burst" aria-hidden="true">✕</div>
+      <h2>DEFEAT</h2>
+      <p class="end-line">Your sigil shatters. Vex gathers the shards — and waits for a rematch.</p>
+      <p class="end-stats" id="loss-stats"></p>
+      <button id="loss-again-btn" type="button" class="big-btn">Duel again</button>
+    </div>
+  </div>
+
+  <div id="float-layer" aria-hidden="true"></div>
+</div>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
